@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Navigate, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { Brand } from '../components/ui.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 
@@ -13,6 +13,16 @@ const links = [
 export default function CitizenLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+
+  if (!user) {
+    return (
+      <Navigate
+        to="/login"
+        state={{ from: '/citizen', message: 'Please sign in or register to access the Citizen Portal.' }}
+        replace
+      />
+    )
+  }
 
   function handleLogout() {
     logout()

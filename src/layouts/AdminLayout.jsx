@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Navigate, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { Brand } from '../components/ui.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 
@@ -13,6 +13,16 @@ const links = [
 export default function AdminLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+
+  if (!user || user.role !== 'admin') {
+    return (
+      <Navigate
+        to="/login"
+        state={{ from: '/admin', message: 'Municipal staff sign-in required to access Admin Command.' }}
+        replace
+      />
+    )
+  }
 
   function handleLogout() {
     logout()

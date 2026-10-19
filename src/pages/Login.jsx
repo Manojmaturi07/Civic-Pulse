@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Brand } from '../components/ui.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 
@@ -12,6 +12,9 @@ export default function Login() {
 
   const { login, demoUsers } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+  const redirectTarget = location.state?.from
+  const promptMessage = location.state?.message
 
   // Real-time role hint based on the entered email
   const cleanEmail = email.trim().toLowerCase()
@@ -43,17 +46,18 @@ export default function Login() {
     }
 
     const user = result.user
-    if (user.role === 'admin') {
-      setSuccessMsg(`Authenticated as Municipal Staff (${user.name}). Redirecting to Admin Portal...`)
-      setTimeout(() => {
-        navigate('/admin')
-      }, 600)
-    } else {
-      setSuccessMsg(`Authenticated as Citizen (${user.name}). Redirecting to Citizen Portal...`)
-      setTimeout(() => {
-        navigate('/citizen')
-      }, 600)
+    const roleTitle = user.role === 'admin' ? 'Municipal Staff' : 'Citizen'
+    
+    // Choose destination: use state.from if compatible with user role
+    let dest = redirectTarget || (user.role === 'admin' ? '/admin' : '/citizen')
+    if (user.role !== 'admin' && String(dest).startsWith('/admin')) {
+      dest = '/citizen'
     }
+
+    setSuccessMsg(`Authenticated as ${roleTitle} (${user.name}). Redirecting...`)
+    setTimeout(() => {
+      navigate(dest, { replace: true })
+    }, 600)
   }
 
   function handleQuickFill(demoEmail, demoPassword) {
@@ -117,6 +121,13 @@ export default function Login() {
           <p style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 18 }}>
             Single unified login for both citizens and municipal officers.
           </p>
+
+          {promptMessage && !error && !successMsg && (
+            <div className="auth-alert info-alert" role="status">
+              <span>ℹ️</span>
+              <span>{promptMessage}</span>
+            </div>
+          )}
 
           {error && (
             <div className="auth-alert error-alert" role="alert">
@@ -185,7 +196,7 @@ export default function Login() {
 
           <div style={{ marginTop: 18, fontSize: 14, textAlign: 'center', color: 'var(--muted)' }}>
             Need an account?{' '}
-            <Link to="/register" style={{ color: 'var(--forest)', fontWeight: 700, textDecoration: 'underline' }}>
+            <Link to="/register" state={location.state} style={{ color: 'var(--forest)', fontWeight: 700, textDecoration: 'underline' }}>
               Create an account
             </Link>
           </div>

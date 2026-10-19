@@ -14,6 +14,7 @@ import Hotspots from './pages/admin/Hotspots.jsx'
 import IssueManagement from './pages/admin/IssueManagement.jsx'
 import Analytics from './pages/admin/Analytics.jsx'
 import ResourcePlanning from './pages/admin/ResourcePlanning.jsx'
+import { ProtectedRoute } from './components/ProtectedRoute.jsx'
 
 export default function App() {
   return (
@@ -22,20 +23,26 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      <Route path="/citizen" element={<CitizenLayout />}>
-        <Route index element={<CitizenDashboard />} />
-        <Route path="report" element={<ReportIssue />} />
-        <Route path="reports" element={<MyReports />} />
-        <Route path="map" element={<CommunityMap />} />
-        <Route path="profile" element={<Profile />} />
+      {/* Citizen routes - accessible by authenticated citizens & admins */}
+      <Route element={<ProtectedRoute allowedRoles={['citizen', 'admin']} />}>
+        <Route path="/citizen" element={<CitizenLayout />}>
+          <Route index element={<CitizenDashboard />} />
+          <Route path="report" element={<ReportIssue />} />
+          <Route path="reports" element={<MyReports />} />
+          <Route path="map" element={<CommunityMap />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
       </Route>
 
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminDashboard />} />
-        <Route path="hotspots" element={<Hotspots />} />
-        <Route path="issues" element={<IssueManagement />} />
-        <Route path="analytics" element={<Analytics />} />
-        <Route path="resources" element={<ResourcePlanning />} />
+      {/* Admin routes - accessible only by authenticated municipal admins */}
+      <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="hotspots" element={<Hotspots />} />
+          <Route path="issues" element={<IssueManagement />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="resources" element={<ResourcePlanning />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

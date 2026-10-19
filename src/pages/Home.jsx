@@ -1,16 +1,63 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Brand, Badge } from '../components/ui.jsx'
 import { useIssues } from '../context/IssueContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import { HOTSPOTS } from '../data/mock.js'
 import LeafletMap from '../components/LeafletMap.jsx'
+import AuthModal from '../components/AuthModal.jsx'
 
 export default function Home() {
   const { issues, stats, typeCounts } = useIssues()
   const { user, isAuthenticated, logout } = useAuth()
+  const navigate = useNavigate()
 
   const [activeHotspot, setActiveHotspot] = useState(HOTSPOTS[0])
+  const [authModal, setAuthModal] = useState({
+    isOpen: false,
+    targetPath: '/citizen/report',
+    title: 'Sign In or Register to Report an Issue',
+    subtitle: 'To report a community hazard and track municipal crew resolution, please sign in to your account or create a new citizen account.',
+    roleHint: 'citizen',
+  })
+
+  function handleReportClick(e) {
+    if (e) e.preventDefault()
+    if (!isAuthenticated) {
+      setAuthModal({
+        isOpen: true,
+        targetPath: '/citizen/report',
+        title: 'Sign In or Register to Report an Issue',
+        subtitle: 'To report a community hazard and track municipal crew resolution, please sign in to your account or create a new citizen account.',
+        roleHint: 'citizen',
+      })
+    } else {
+      navigate('/citizen/report')
+    }
+  }
+
+  function handleCommandClick(e) {
+    if (e) e.preventDefault()
+    if (!isAuthenticated) {
+      setAuthModal({
+        isOpen: true,
+        targetPath: '/admin',
+        title: 'Municipal Command Center Access',
+        subtitle: 'Access to the administrative hotspot analysis and resource planning engine requires municipal official authentication (@city.gov).',
+        roleHint: 'admin',
+      })
+    } else if (user?.role !== 'admin') {
+      setAuthModal({
+        isOpen: true,
+        targetPath: '/admin',
+        title: 'Municipal Officer Account Required',
+        subtitle: `You are currently signed in as Citizen (${user.name}). To access Municipal Command, please sign in with an official municipal staff account (@city.gov).`,
+        roleHint: 'admin',
+      })
+    } else {
+      navigate('/admin')
+    }
+  }
 
   const maxTypeCount = Math.max(...typeCounts.map((t) => t.count), 1)
   const recentReports = issues.slice(0, 6)
@@ -80,16 +127,38 @@ export default function Home() {
             CivicPulse turns scattered complaint tickets into intelligent hotspot density maps, priority scores, and department workload plans so roads, drainage, water supply, and garbage issues get resolved faster.
           </p>
           <div className="hero-actions">
-            <Link className="btn btn-primary" to="/citizen/report">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleReportClick}
+            >
               ➕ Report an Issue
-            </Link>
-            <Link className="btn btn-gold" to={isAuthenticated && user?.role === 'admin' ? '/admin' : '/login'}>
+            </button>
+            <button
+              type="button"
+              className="btn btn-gold"
+              onClick={handleCommandClick}
+            >
               🏛️ Municipal Command
-            </Link>
+            </button>
             <a className="btn btn-ghost" href="#hotspots">
               📍 Explore Hotspots
             </a>
           </div>
+
+          {isAuthenticated && (
+            <div style={{ marginTop: 14, fontSize: 13, color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span>Signed in as <strong>{user?.name}</strong> ({user?.role === 'admin' ? '🏛️ Municipal Staff' : '👤 Citizen Member'})</span>
+              <span>·</span>
+              <button
+                type="button"
+                onClick={logout}
+                style={{ background: 'none', border: 'none', color: 'var(--forest)', fontWeight: 700, cursor: 'pointer', padding: 0, textDecoration: 'underline' }}
+              >
+                Sign out
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="hero-panel">
@@ -227,9 +296,14 @@ export default function Home() {
               Live public log of verified civic grievances submitted by citizens across monitored wards.
             </p>
           </div>
-          <Link to="/citizen/report" className="btn btn-ghost" style={{ fontSize: 13 }}>
+          <button
+            type="button"
+            onClick={handleReportClick}
+            className="btn btn-ghost"
+            style={{ fontSize: 13 }}
+          >
             ➕ Submit a Report
-          </Link>
+          </button>
         </div>
 
         <div className="home-issues-grid">
@@ -327,12 +401,30 @@ export default function Home() {
           </p>
         </div>
         <div className="cta-actions">
-          <Link to="/citizen/report" className="btn btn-gold">
+          <button
+            type="button"
+            onClick={handleReportClick}
+            className="btn btn-gold"
+          >
             Report an Issue
-          </Link>
-          <Link to="/register" className="btn btn-ghost" style={{ color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.4)' }}>
-            Create Account
-          </Link>
+          </button>
+          {isAuthenticated ? (
+            <Link
+              to={user?.role === 'admin' ? '/admin' : '/citizen'}
+              className="btn btn-ghost"
+              style={{ color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.4)' }}
+            >
+              Go to Portal →
+            </Link>
+          ) : (
+            <Link
+              to="/register"
+              className="btn btn-ghost"
+              style={{ color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.4)' }}
+            >
+              Create Account
+            </Link>
+          )}
         </div>
       </section>
 
@@ -348,6 +440,16 @@ export default function Home() {
           <span>Capstone Project C2C-146 · Data Science & Big Data Analytics</span>
         </div>
       </footer>
+
+      {/* Auth Prompt Modal */}
+      <AuthModal
+        isOpen={authModal.isOpen}
+        onClose={() => setAuthModal((prev) => ({ ...prev, isOpen: false }))}
+        targetPath={authModal.targetPath}
+        title={authModal.title}
+        subtitle={authModal.subtitle}
+        roleHint={authModal.roleHint}
+      />
     </div>
   )
 }
