@@ -10,7 +10,7 @@ export default function Login() {
   const [successMsg, setSuccessMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const { login, demoUsers } = useAuth()
+  const { login } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const redirectTarget = location.state?.from
@@ -31,13 +31,13 @@ export default function Login() {
       : 'citizen'
     : null
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     setError('')
     setSuccessMsg('')
     setIsLoading(true)
 
-    const result = login(email, password)
+    const result = await login(email, password)
 
     if (!result.success) {
       setError(result.error || 'Invalid credentials. Please try again.')
@@ -60,12 +60,6 @@ export default function Login() {
     }, 600)
   }
 
-  function handleQuickFill(demoEmail, demoPassword) {
-    setEmail(demoEmail)
-    setPassword(demoPassword)
-    setError('')
-  }
-
   return (
     <div className="auth-wrap">
       <div className="auth-art">
@@ -75,38 +69,6 @@ export default function Login() {
           <p style={{ marginTop: 14, opacity: 0.85, maxWidth: 440, lineHeight: 1.6 }}>
             Enter your credentials. CivicPulse automatically recognizes your account role and routes you directly to the Citizen reporting dashboard or the Municipal administrative workbench.
           </p>
-        </div>
-
-        <div className="demo-credentials-card">
-          <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--gold-soft)', marginBottom: 8 }}>
-            Demo Quick-Fill Accounts
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <button
-              type="button"
-              className="quick-btn"
-              onClick={() => handleQuickFill('admin@city.gov', 'civicpulse')}
-            >
-              <span>🏛️ <strong>Municipal Admin</strong> (admin@city.gov)</span>
-              <span className="pill-badge pill-admin">Admin Portal</span>
-            </button>
-            <button
-              type="button"
-              className="quick-btn"
-              onClick={() => handleQuickFill('engineer@city.gov', 'civicpulse')}
-            >
-              <span>👷‍♀️ <strong>Municipal Engineer</strong> (engineer@city.gov)</span>
-              <span className="pill-badge pill-admin">Admin Portal</span>
-            </button>
-            <button
-              type="button"
-              className="quick-btn"
-              onClick={() => handleQuickFill('citizen@civicpulse.app', 'civicpulse')}
-            >
-              <span>👤 <strong>Citizen User</strong> (citizen@civicpulse.app)</span>
-              <span className="pill-badge pill-citizen">Citizen Portal</span>
-            </button>
-          </div>
         </div>
 
         <p style={{ opacity: 0.6, fontSize: 13 }}>

@@ -1,90 +1,38 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { api, setAuthToken } from '../services/api.js'
 
 const AuthContext = createContext(null)
 
-const DEFAULT_USERS = [
-  {
-    id: 'usr-admin-1',
-    email: 'admin@city.gov',
-    password: 'civicpulse',
-    name: 'Commissioner R. Varma',
-    role: 'admin',
-    department: 'Municipal Administration',
-    city: 'Vijayawada',
-    avatar: '🏛️',
-  },
-  {
-    id: 'usr-admin-2',
-    email: 'engineer@city.gov',
-    password: 'civicpulse',
-    name: 'Priya Sharma (Assistant Engineer)',
-    role: 'admin',
-    department: 'Roads & Transport',
-    city: 'Vijayawada',
-    avatar: '👷‍♀️',
-  },
-  {
-    id: 'usr-citizen-1',
-    email: 'citizen@civicpulse.app',
-    password: 'civicpulse',
-    name: 'Ananya Kumar',
-    role: 'citizen',
-    department: 'Resident',
-    city: 'Vijayawada',
-    avatar: '👤',
-  },
-  {
-    id: 'usr-citizen-2',
-    email: 'demo@civicpulse.app',
-    password: 'civicpulse',
-    name: 'Demo Citizen',
-    role: 'citizen',
-    department: 'Resident',
-    city: 'Vijayawada',
-    avatar: '👤',
-  },
-]
-
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    try {
-      const stored = localStorage.getItem('civicpulse_current_user')
-      return stored ? JSON.parse(stored) : null
-    } catch {
-      return null
-    }
-  })
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  const [registeredUsers, setRegisteredUsers] = useState(() => {
-    try {
-      const stored = localStorage.getItem('civicpulse_registered_users')
-      return stored ? JSON.parse(stored) : DEFAULT_USERS
-    } catch {
-      return DEFAULT_USERS
-    }
-  })
-
+  // Verify and sync session on initial mount against FastAPI backend
   useEffect(() => {
-    try {
-      localStorage.setItem('civicpulse_registered_users', JSON.stringify(registeredUsers))
-    } catch (e) {
-      console.error('Failed to sync registered users', e)
-    }
-  }, [registeredUsers])
-
-  useEffect(() => {
-    try {
-      if (user) {
-        localStorage.setItem('civicpulse_current_user', JSON.stringify(user))
-      } else {
-        localStorage.removeItem('civicpulse_current_user')
+    async function restoreSession() {
+      const token = localStorage.getItem('civicpulse_token')
+      if (!token) {
+        setUser(null)
+        setLoading(false)
+        return
       }
-    } catch (e) {
-      console.error('Failed to sync current user', e)
-    }
-  }, [user])
 
-  function login(email, password) {
+      try {
+        const remoteUser = await api.getMe()
+        setUser(remoteUser)
+      } catch (err) {
+        console.warn('Session verification failed or expired:', err.message)
+        setAuthToken(null)
+        setUser(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    restoreSession()
+  }, [])
+
+  async function login(email, password) {
     const cleanEmail = (email || '').trim().toLowerCase()
     const cleanPassword = (password || '').trim()
 
@@ -95,52 +43,23 @@ export function AuthProvider({ children }) {
       return { success: false, error: 'Please enter a password.' }
     }
 
-    // Check existing registered users
-    const matched = registeredUsers.find((u) => u.email.toLowerCase() === cleanEmail)
-
-    if (matched) {
-      // Validate password if set
-      if (matched.password && cleanPassword !== matched.password && cleanPassword !== 'civicpulse') {
-        return { success: false, error: 'Incorrect password. (Hint: default demo password is "civicpulse")' }
+    try {
+      const res = await api.login({ email: cleanEmail, password: cleanPassword })
+      if (res && res.access_token) {
+        setAuthToken(res.access_token)
+        setUser(res.user)
+        return { success: true, user: res.user }
       }
-      setUser(matched)
-      return { success: true, user: matched }
+      return { success: false, error: 'Failed to obtain authentication token from server.' }
+    } catch (err) {
+      return {
+        success: false,
+        error: err.message || 'Invalid email or password credentials.',
+      }
     }
-
-    // Smart role determination for new / ad-hoc logins
-    // Email domains or prefixes indicating municipal official
-    const isMunicipal =
-      cleanEmail.endsWith('@city.gov') ||
-      cleanEmail.endsWith('@gov.in') ||
-      cleanEmail.endsWith('@municipal.gov') ||
-      cleanEmail.startsWith('admin@') ||
-      cleanEmail.startsWith('municipal@') ||
-      cleanEmail.startsWith('officer@') ||
-      cleanEmail.includes('admin') ||
-      cleanEmail.includes('municipal')
-
-    const role = isMunicipal ? 'admin' : 'citizen'
-    const namePrefix = cleanEmail.split('@')[0]
-    const formattedName =
-      namePrefix.charAt(0).toUpperCase() + namePrefix.slice(1).replace(/[._-]/g, ' ')
-
-    const newUser = {
-      id: 'usr-' + Date.now(),
-      email: cleanEmail,
-      password: cleanPassword,
-      name: isMunicipal ? `Officer ${formattedName}` : formattedName,
-      role: role,
-      department: isMunicipal ? 'Municipal Corporation' : 'Resident',
-      city: 'Vijayawada',
-      avatar: isMunicipal ? '🏛️' : '👤',
-    }
-
-    setRegisteredUsers((prev) => [...prev, newUser])
-    setUser(newUser)
-    return { success: true, user: newUser }
   }
 
-  function register({ name, email, password, city, role, department }) {
+  async function register({ name, email, password, city, department }) {
     const cleanEmail = (email || '').trim().toLowerCase()
     const cleanPassword = (password || '').trim()
 
@@ -148,44 +67,52 @@ export function AuthProvider({ children }) {
       return { success: false, error: 'Email and password are required.' }
     }
 
-    const existing = registeredUsers.find((u) => u.email.toLowerCase() === cleanEmail)
-    if (existing) {
-      return { success: false, error: 'An account with this email already exists. Please log in.' }
+    try {
+      // Mandatory security constraint: Always register with citizen role on backend
+      const res = await api.register({
+        name: name ? name.trim() : 'Citizen Member',
+        email: cleanEmail,
+        password: cleanPassword,
+        city: city || 'Vijayawada',
+        department: department || 'Resident',
+      })
+
+      if (res && res.access_token) {
+        setAuthToken(res.access_token)
+        setUser(res.user)
+        return { success: true, user: res.user }
+      }
+      return { success: false, error: 'Registration succeeded but session token was missing.' }
+    } catch (err) {
+      return {
+        success: false,
+        error: err.message || 'Registration failed. Please check your information.',
+      }
     }
-
-    // Auto-detect role if user email is clearly a municipal domain, otherwise respect provided role or default
-    const detectedRole =
-      role ||
-      (cleanEmail.endsWith('@city.gov') || cleanEmail.endsWith('@gov.in') || cleanEmail.endsWith('@municipal.gov')
-        ? 'admin'
-        : 'citizen')
-
-    const newUser = {
-      id: 'usr-' + Date.now(),
-      email: cleanEmail,
-      password: cleanPassword,
-      name: name || (detectedRole === 'admin' ? 'Municipal Officer' : 'Citizen Member'),
-      role: detectedRole,
-      department: department || (detectedRole === 'admin' ? 'Public Administration' : 'Resident'),
-      city: city || 'Vijayawada',
-      avatar: detectedRole === 'admin' ? '🏛️' : '👤',
-    }
-
-    setRegisteredUsers((prev) => [...prev, newUser])
-    setUser(newUser)
-    return { success: true, user: newUser }
   }
 
-  function updateUser(updatedFields) {
+  async function updateUser(updatedFields) {
     if (!user) return
-    const updated = { ...user, ...updatedFields }
-    setUser(updated)
-    setRegisteredUsers((prev) => prev.map((u) => (u.id === user.id ? updated : u)))
+    try {
+      const updated = await api.updateProfile(updatedFields)
+      setUser(updated)
+      return updated
+    } catch (err) {
+      console.error('Failed to sync profile update to backend', err)
+      throw err
+    }
   }
 
-  function logout() {
-    setUser(null)
-    localStorage.removeItem('civicpulse_current_user')
+  async function logout() {
+    try {
+      await api.logout()
+    } catch (err) {
+      console.warn('Logout API notification error:', err.message)
+    } finally {
+      setAuthToken(null)
+      setUser(null)
+      localStorage.removeItem('civicpulse_current_user')
+    }
   }
 
   return (
@@ -193,11 +120,11 @@ export function AuthProvider({ children }) {
       value={{
         user,
         isAuthenticated: !!user,
+        loading,
         login,
         register,
         updateUser,
         logout,
-        demoUsers: DEFAULT_USERS,
       }}
     >
       {children}

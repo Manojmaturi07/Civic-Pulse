@@ -1,13 +1,35 @@
-import { useState } from 'react'
-import { HOTSPOTS, ISSUE_TYPES } from '../../data/mock.js'
+import { useState, useEffect } from 'react'
+import { ISSUE_TYPES } from '../../data/mock.js'
 import { Badge } from '../../components/ui.jsx'
 import { useIssues } from '../../context/IssueContext.jsx'
 import LeafletMap from '../../components/LeafletMap.jsx'
+import { api } from '../../services/api.js'
 
 export default function CommunityMap() {
   const { issues } = useIssues()
+  const [hotspots, setHotspots] = useState([])
   const [selectedType, setSelectedType] = useState('All')
   const [activeItem, setActiveItem] = useState(issues[0] || null)
+
+  useEffect(() => {
+    async function loadHotspots() {
+      try {
+        const live = await api.getHotspots()
+        if (Array.isArray(live)) {
+          setHotspots(live)
+        }
+      } catch (err) {
+        console.warn('Could not load live hotspots in CommunityMap:', err.message)
+      }
+    }
+    loadHotspots()
+  }, [])
+
+  useEffect(() => {
+    if (!activeItem && issues.length > 0) {
+      setActiveItem(issues[0])
+    }
+  }, [issues, activeItem])
 
   const filteredIssues =
     selectedType === 'All'
@@ -52,7 +74,7 @@ export default function CommunityMap() {
         <div className="card" style={{ padding: 12 }}>
           <LeafletMap
             height="480px"
-            hotspots={HOTSPOTS}
+            hotspots={hotspots}
             issues={filteredIssues}
             activeItem={activeItem}
             onItemSelect={(item) => setActiveItem(item)}

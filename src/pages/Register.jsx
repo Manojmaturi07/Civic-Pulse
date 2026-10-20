@@ -19,7 +19,7 @@ export default function Register() {
   const redirectTarget = location.state?.from
   const promptMessage = location.state?.message
 
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault()
     setError('')
     setSuccessMsg('')
@@ -36,12 +36,11 @@ export default function Register() {
 
     setIsSubmitting(true)
 
-    const res = register({
+    const res = await register({
       name,
       email,
       password,
       city,
-      role: 'citizen',
       department: 'Resident',
     })
 

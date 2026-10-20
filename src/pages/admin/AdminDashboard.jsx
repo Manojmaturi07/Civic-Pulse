@@ -1,13 +1,29 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Badge } from '../../components/ui.jsx'
-import { HOTSPOTS } from '../../data/mock.js'
 import { useIssues } from '../../context/IssueContext.jsx'
 import { useAuth } from '../../context/AuthContext.jsx'
 import LeafletMap from '../../components/LeafletMap.jsx'
+import { api } from '../../services/api.js'
 
 export default function AdminDashboard() {
   const { issues, stats, typeCounts } = useIssues()
   const { user } = useAuth()
+  const [hotspots, setHotspots] = useState([])
+
+  useEffect(() => {
+    async function loadHotspots() {
+      try {
+        const live = await api.getHotspots()
+        if (Array.isArray(live)) {
+          setHotspots(live)
+        }
+      } catch (err) {
+        console.warn('Could not load live hotspots in AdminDashboard:', err.message)
+      }
+    }
+    loadHotspots()
+  }, [])
 
   const highPriorityIssues = issues.filter(
     (i) => i.priority === 'High' || i.priority === 'Critical',
@@ -61,7 +77,7 @@ export default function AdminDashboard() {
               Open Full Map →
             </Link>
           </div>
-          <LeafletMap height="320px" hotspots={HOTSPOTS} issues={issues.slice(0, 8)} zoom={11} />
+          <LeafletMap height="320px" hotspots={hotspots} issues={issues.slice(0, 8)} zoom={11} />
         </div>
 
         <div className="card">

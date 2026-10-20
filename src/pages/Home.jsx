@@ -1,18 +1,34 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Brand, Badge } from '../components/ui.jsx'
 import { useIssues } from '../context/IssueContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-import { HOTSPOTS } from '../data/mock.js'
 import LeafletMap from '../components/LeafletMap.jsx'
 import AuthModal from '../components/AuthModal.jsx'
+import { api } from '../services/api.js'
 
 export default function Home() {
   const { issues, stats, typeCounts } = useIssues()
   const { user, isAuthenticated, logout } = useAuth()
   const navigate = useNavigate()
 
-  const [activeHotspot, setActiveHotspot] = useState(HOTSPOTS[0])
+  const [hotspots, setHotspots] = useState([])
+  const [activeHotspot, setActiveHotspot] = useState(null)
+
+  useEffect(() => {
+    async function loadHotspots() {
+      try {
+        const live = await api.getHotspots()
+        if (Array.isArray(live) && live.length > 0) {
+          setHotspots(live)
+          setActiveHotspot(live[0])
+        }
+      } catch (err) {
+        console.warn('Could not load live hotspots on home page:', err.message)
+      }
+    }
+    loadHotspots()
+  }, [])
   const [authModal, setAuthModal] = useState({
     isOpen: false,
     targetPath: '/citizen/report',
@@ -233,10 +249,10 @@ export default function Home() {
           <div className="card" style={{ padding: 12 }}>
             <LeafletMap
               height="380px"
-              hotspots={HOTSPOTS}
+              hotspots={hotspots}
               activeItem={activeHotspot}
               onItemSelect={(h) => setActiveHotspot(h)}
-              center={[activeHotspot.lat || 16.5062, activeHotspot.lng || 80.648]}
+              center={[activeHotspot?.lat || 16.5062, activeHotspot?.lng || 80.648]}
               zoom={11}
             />
             <div style={{ marginTop: 12, padding: '0 6px', fontSize: 13, color: 'var(--muted)', display: 'flex', gap: 16 }}>
@@ -247,26 +263,32 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <div className="card" style={{ borderLeft: '4px solid var(--forest)' }}>
-              <span style={{ fontSize: 12, textTransform: 'uppercase', color: 'var(--muted)', fontWeight: 800 }}>
-                Selected Zone
-              </span>
-              <h3 style={{ fontFamily: 'Fraunces, serif', fontSize: '1.4rem', marginTop: 4 }}>
-                {activeHotspot.name}
-              </h3>
-              <p style={{ margin: '8px 0', color: 'var(--muted)', fontSize: 14 }}>
-                <strong>{activeHotspot.issues}</strong> verified reports registered ·{' '}
-                <Badge value={activeHotspot.priority} />
-              </p>
-              <p style={{ fontSize: 14, lineHeight: 1.6 }}>
-                High density indicates chronic infrastructure failure. Priority calculation routes prompt assistance to this coordinate cluster before isolated tickets.
-              </p>
-            </div>
+            {activeHotspot ? (
+              <div className="card" style={{ borderLeft: '4px solid var(--forest)' }}>
+                <span style={{ fontSize: 12, textTransform: 'uppercase', color: 'var(--muted)', fontWeight: 800 }}>
+                  Selected Zone
+                </span>
+                <h3 style={{ fontFamily: 'Fraunces, serif', fontSize: '1.4rem', marginTop: 4 }}>
+                  {activeHotspot.name}
+                </h3>
+                <p style={{ margin: '8px 0', color: 'var(--muted)', fontSize: 14 }}>
+                  <strong>{activeHotspot.issues}</strong> verified reports registered ·{' '}
+                  <Badge value={activeHotspot.priority} />
+                </p>
+                <p style={{ fontSize: 14, lineHeight: 1.6 }}>
+                  High density indicates chronic infrastructure failure. Priority calculation routes prompt assistance to this coordinate cluster before isolated tickets.
+                </p>
+              </div>
+            ) : (
+              <div className="card" style={{ padding: 24, textAlign: 'center', color: 'var(--muted)' }}>
+                <span>Loading live geospatial hotspot intelligence...</span>
+              </div>
+            )}
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-              {HOTSPOTS.slice(0, 4).map((h) => (
+              {hotspots.slice(0, 4).map((h) => (
                 <button
-                  key={h.name}
+                  key={h.name || h.id}
                   type="button"
                   onClick={() => setActiveHotspot(h)}
                   className="card"
@@ -274,11 +296,11 @@ export default function Home() {
                     padding: 12,
                     textAlign: 'left',
                     cursor: 'pointer',
-                    borderColor: activeHotspot.name === h.name ? 'var(--forest)' : undefined,
-                    background: activeHotspot.name === h.name ? 'var(--bg-2)' : '#fff',
+                    borderColor: activeHotspot?.name === h.name ? 'var(--forest)' : undefined,
+                    background: activeHotspot?.name === h.name ? 'var(--bg-2)' : '#fff',
                   }}
                 >
-                  <strong style={{ fontSize: 13, display: 'block' }}>{h.name.split(',')[0]}</strong>
+                  <strong style={{ fontSize: 13, display: 'block' }}>{(h.name || '').split(',')[0]}</strong>
                   <span style={{ fontSize: 12, color: 'var(--muted)' }}>{h.issues} tickets</span>
                 </button>
               ))}

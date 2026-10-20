@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext.jsx'
 
 export default function AuthModal({
   isOpen,
@@ -11,7 +10,6 @@ export default function AuthModal({
   roleHint = 'citizen',
 }) {
   const navigate = useNavigate()
-  const { login } = useAuth()
 
   useEffect(() => {
     function handleKeyDown(e) {
@@ -53,22 +51,6 @@ export default function AuthModal({
         message: 'Create a new citizen account to report and follow civic infrastructure issues.',
       },
     })
-  }
-
-  function handleQuickDemoCitizen() {
-    const res = login('citizen@civicpulse.app', 'civicpulse')
-    if (res.success) {
-      onClose()
-      navigate(targetPath)
-    }
-  }
-
-  function handleQuickDemoAdmin() {
-    const res = login('admin@city.gov', 'civicpulse')
-    if (res.success) {
-      onClose()
-      navigate(targetPath.startsWith('/admin') ? targetPath : '/admin')
-    }
   }
 
   return (
@@ -118,33 +100,6 @@ export default function AuthModal({
             </div>
             <span className="modal-action-arrow">→</span>
           </button>
-        </div>
-
-        {/* Demo instant login divider */}
-        <div className="modal-demo-section">
-          <div className="modal-divider">
-            <span>or test immediately with one click</span>
-          </div>
-
-          {roleHint === 'admin' ? (
-            <button
-              type="button"
-              className="quick-demo-pill-btn"
-              onClick={handleQuickDemoAdmin}
-            >
-              <span>🏛️ Instant Demo: Continue as <strong>Commissioner Varma (Admin)</strong></span>
-              <span className="demo-go">Quick Sign In →</span>
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="quick-demo-pill-btn"
-              onClick={handleQuickDemoCitizen}
-            >
-              <span>👤 Instant Demo: Continue as <strong>Ananya Kumar (Citizen)</strong></span>
-              <span className="demo-go">Quick Sign In →</span>
-            </button>
-          )}
         </div>
 
         <div className="modal-footer-note">

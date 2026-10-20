@@ -1,4 +1,32 @@
-node_modules
-dist
-.DS_Store
+# Dependencies
+node_modules/
+dist/
+
+# Environment and secrets (Never commit!)
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Testing and build
+.pytest_cache/
+.coverage
+htmlcov/
 *.log
+
+# System files
+.DS_Store
+Thumbs.db

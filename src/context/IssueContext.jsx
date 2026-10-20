@@ -1,98 +1,88 @@
-import { createContext, useContext, useEffect, useState } from 'react'
-import { ISSUES as INITIAL_ISSUES } from '../data/mock.js'
+import { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import { api } from '../services/api.js'
 
 const IssueContext = createContext(null)
 
 export function IssueProvider({ children }) {
-  const [issues, setIssues] = useState(() => {
+  const [issues, setIssues] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  const fetchIssues = useCallback(async () => {
+    setLoading(true)
+    setError(null)
     try {
-      const stored = localStorage.getItem('civicpulse_issues')
-      return stored ? JSON.parse(stored) : INITIAL_ISSUES
-    } catch {
-      return INITIAL_ISSUES
+      const remoteIssues = await api.getIssues({ limit: 100 })
+      if (Array.isArray(remoteIssues)) {
+        setIssues(remoteIssues)
+      } else {
+        setIssues([])
+      }
+    } catch (err) {
+      console.error('Could not fetch issues from backend API:', err.message)
+      setError(err.message)
+    } finally {
+      setLoading(false)
     }
-  })
+  }, [])
 
   useEffect(() => {
-    try {
-      localStorage.setItem('civicpulse_issues', JSON.stringify(issues))
-    } catch (e) {
-      console.error('Failed to sync issues to localStorage', e)
-    }
-  }, [issues])
+    fetchIssues()
+  }, [fetchIssues])
 
-  function addIssue({ type, description, area, city, photo }) {
-    // Determine next ID
-    const maxNum = issues.reduce((acc, curr) => {
-      const num = parseInt(curr.id.replace('CP-', ''), 10)
-      return isNaN(num) ? acc : Math.max(acc, num)
-    }, 1042)
+  async function addIssue({ type, description, area, city, photo, lat, lng }) {
+    let latitude = lat !== undefined ? Number(lat) : 16.5062
+    let longitude = lng !== undefined ? Number(lng) : 80.648
 
-    const nextId = `CP-${maxNum + 1}`
-    const today = new Date().toISOString().split('T')[0]
-
-    // Default coordinates based on city/area or fallback
-    let lat = 16.5062
-    let lng = 80.648
-    if (city?.toLowerCase().includes('guntur')) {
-      lat = 16.3067
-      lng = 80.4365
-    } else if (city?.toLowerCase().includes('tenali')) {
-      lat = 16.2428
-      lng = 80.6404
-    } else if (city?.toLowerCase().includes('mangalagiri')) {
-      lat = 16.4308
-      lng = 80.568
+    if (lat === undefined || lng === undefined) {
+      const cityClean = (city || '').toLowerCase()
+      if (cityClean.includes('guntur')) {
+        latitude = 16.3067
+        longitude = 80.4365
+      } else if (cityClean.includes('tenali')) {
+        latitude = 16.2428
+        longitude = 80.6404
+      } else if (cityClean.includes('mangalagiri')) {
+        latitude = 16.4308
+        longitude = 80.568
+      }
     }
 
-    // Default severity and score
-    const severity = type === 'Road Damage' || type === 'Drainage Blockage' ? 8 : 7
-    const score = 75 + Math.floor(Math.random() * 15)
-    const priority = score >= 80 ? 'High' : score >= 60 ? 'Medium' : 'Low'
-
-    // Department mapping
-    const deptMap = {
-      'Road Damage': 'Roads & Transport',
-      'Water Leakage': 'Water Supply',
-      'Drainage Blockage': 'Public Works',
-      'Garbage Accumulation': 'Sanitation',
-      'Streetlight Failure': 'Electrical',
-    }
-
-    const newIssue = {
-      id: nextId,
+    // Call backend API - do NOT fake success before backend confirms
+    const created = await api.createIssue({
       type,
       description,
-      city: city || 'Vijayawada',
       area: area || 'Downtown',
-      lat,
-      lng,
-      status: 'Pending',
-      priority,
-      score,
-      severity,
-      reports: 1,
-      department: deptMap[type] || 'Public Works',
-      date: today,
+      city: city || 'Vijayawada',
+      lat: latitude,
+      lng: longitude,
       photo: photo || null,
-      isUserCreated: true,
+    })
+
+    if (created) {
+      setIssues((prev) => [created, ...prev])
+      return created
     }
-
-    setIssues((prev) => [newIssue, ...prev])
-    return newIssue
+    throw new Error('Failed to create civic complaint record on backend server.')
   }
 
-  function updateIssue(id, field, value) {
-    setIssues((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, [field]: value } : item)),
-    )
+  async function updateIssue(id, field, value) {
+    const payload = typeof field === 'object' ? field : { [field]: value }
+    const updated = await api.updateIssue(id, payload)
+    if (updated) {
+      setIssues((prev) =>
+        prev.map((item) => ((item.id === id || item.issue_code === id) ? updated : item))
+      )
+      return updated
+    }
   }
 
-  function deleteIssue(id) {
-    setIssues((prev) => prev.filter((item) => item.id !== id))
+  async function deleteIssue(id) {
+    await api.deleteIssue(id)
+    setIssues((prev) => prev.filter((item) => item.id !== id && item.issue_code !== id))
   }
 
-  // Calculate live statistics
+  // Calculate live statistics from active database issues
   const stats = {
     total: issues.length,
     pending: issues.filter((i) => i.status === 'Pending').length,
@@ -101,9 +91,10 @@ export function IssueProvider({ children }) {
     assigned: issues.filter((i) => i.status === 'Assigned' || i.status === 'In Progress').length,
   }
 
-  // Calculate type counts
+  // Calculate category mix
   const typeMap = issues.reduce((acc, curr) => {
-    acc[curr.type] = (acc[curr.type] || 0) + 1
+    const t = curr.type || 'Other'
+    acc[t] = (acc[t] || 0) + 1
     return acc
   }, {})
 
@@ -116,6 +107,9 @@ export function IssueProvider({ children }) {
     <IssueContext.Provider
       value={{
         issues,
+        loading,
+        error,
+        refreshIssues: fetchIssues,
         addIssue,
         updateIssue,
         deleteIssue,

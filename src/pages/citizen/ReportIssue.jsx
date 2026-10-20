@@ -23,11 +23,11 @@ export default function ReportIssue() {
     if (!area) setArea(loc.area)
   }
 
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault()
     if (!description.trim() || !area.trim()) return
 
-    const newIssue = addIssue({
+    const newIssue = await addIssue({
       type,
       description,
       area,

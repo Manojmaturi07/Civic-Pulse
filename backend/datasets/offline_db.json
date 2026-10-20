@@ -1,0 +1,770 @@
+{
+  "users": [
+    {
+      "name": "Commissioner R. Varma",
+      "email": "admin@city.gov",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$bEm63ThYcREhkSdNqreRGQ$RuoOAqw/qKOMEPKuqGqcu4Db0OfFpJS76CE4pfKCZe4",
+      "role": "admin",
+      "city": "Vijayawada",
+      "department": "Municipal Administration",
+      "avatar": "\ud83c\udfdb\ufe0f",
+      "is_active": true,
+      "created_at": "2026-10-19 15:22:21.272443+00:00",
+      "updated_at": "2026-10-19 15:22:21.272443+00:00",
+      "_id": "5cd65845-5507-4e3e-ae41-2232dbf60270"
+    },
+    {
+      "name": "Ananya Kumar",
+      "email": "citizen@civicpulse.app",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$bEm63ThYcREhkSdNqreRGQ$RuoOAqw/qKOMEPKuqGqcu4Db0OfFpJS76CE4pfKCZe4",
+      "role": "citizen",
+      "city": "Vijayawada",
+      "department": "Resident",
+      "avatar": "\ud83d\udc64",
+      "is_active": true,
+      "created_at": "2026-10-19 15:22:21.389203+00:00",
+      "updated_at": "2026-10-19 15:22:21.389203+00:00",
+      "_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5"
+    },
+    {
+      "name": "Priya Sharma (Assistant Engineer)",
+      "email": "engineer@city.gov",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$bEm63ThYcREhkSdNqreRGQ$RuoOAqw/qKOMEPKuqGqcu4Db0OfFpJS76CE4pfKCZe4",
+      "role": "admin",
+      "city": "Vijayawada",
+      "department": "Roads & Transport",
+      "avatar": "\ud83d\udc77\u200d\u2640\ufe0f",
+      "is_active": true,
+      "created_at": "2026-10-19 15:22:21.520183+00:00",
+      "updated_at": "2026-10-19 15:22:21.520183+00:00",
+      "_id": "a4db0121-637a-460b-85bf-ece8ef1ef6a1"
+    },
+    {
+      "name": "Citizen Ramesh",
+      "email": "test_6d620911@example.com",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$W6/HXxxB/4qQocngXG/Gew$GrKeKENrRiW1HHBTqSeIT0GZ8e7RmRQ0lVWfFqW7D6M",
+      "role": "citizen",
+      "city": "Vijayawada",
+      "department": "Resident",
+      "avatar": "\ud83d\udc64",
+      "is_active": true,
+      "created_at": "2026-10-19 15:24:19.217975+00:00",
+      "updated_at": "2026-10-19 15:24:19.217975+00:00",
+      "_id": "c57f4c2a-7111-4d58-bfe4-258221abefa4"
+    },
+    {
+      "name": "Citizen Ramesh",
+      "email": "test_bc1e6d2b@example.com",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$0koMQb+y8gy4WJhzOhm1pA$8anfaza0ssCESaO3jkVrAhrX8t9Z+/Ci25gdCHCWNgg",
+      "role": "citizen",
+      "city": "Vijayawada",
+      "department": "Resident",
+      "avatar": "\ud83d\udc64",
+      "is_active": true,
+      "created_at": "2026-10-19 15:26:54.811139+00:00",
+      "updated_at": "2026-10-19 15:26:54.811139+00:00",
+      "_id": "4fe8fc17-2eb5-4222-b83d-1d4ebacab65e"
+    },
+    {
+      "name": "MATURI MANOJ KUMAR",
+      "email": "2300030416@kluniversity.in",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$nmXcSxCxVQrPy1dAb7GhiQ$uQWhyWAHoScwokt2A3i2tlxKURORQ/S/GCateq2WUzQ",
+      "role": "citizen",
+      "city": "Vijayawada",
+      "department": "Resident",
+      "avatar": "\ud83d\udc64",
+      "is_active": true,
+      "created_at": "2026-10-20 01:23:15.213228+00:00",
+      "updated_at": "2026-10-20 01:23:15.213228+00:00",
+      "_id": "888a8950-b904-4cb1-95cd-9ac043ccdce1"
+    },
+    {
+      "name": "Rohit Sharma",
+      "email": "rohit_ff2627@example.com",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$tIukppsKOSmMrVOoICgE9g$2fro9YvSGI02GsvoKNUKyzTN7UEzAal3bii/DVi0JxM",
+      "role": "citizen",
+      "city": "Vijayawada",
+      "department": "Resident",
+      "avatar": "\ud83d\udc64",
+      "is_active": true,
+      "created_at": "2026-10-20 02:51:59.597376+00:00",
+      "updated_at": "2026-10-20 02:51:59.597376+00:00",
+      "_id": "bcc517cc-4a63-4d98-a6e6-9d3c25f618dd"
+    }
+  ],
+  "issues": [
+    {
+      "issue_code": "CP-1042",
+      "type": "Road Damage",
+      "description": "Deep potholes along the market stretch causing vehicle damage.",
+      "city": "Vijayawada",
+      "area": "Benz Circle",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.648,
+          16.5062
+        ]
+      },
+      "lat": 16.5062,
+      "lng": 80.648,
+      "status": "Pending",
+      "priority": "High",
+      "score": 91,
+      "severity": 9,
+      "reports": 48,
+      "department": "Roads & Transport",
+      "date": "2026-09-12",
+      "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "b5917030-33d6-4326-ac95-34ee6430648d"
+    },
+    {
+      "issue_code": "CP-1038",
+      "type": "Garbage Accumulation",
+      "description": "Overflowing bins near residential colony for 11 days.",
+      "city": "Guntur",
+      "area": "Brodipet",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.4365,
+          16.3067
+        ]
+      },
+      "lat": 16.3067,
+      "lng": 80.4365,
+      "status": "Assigned",
+      "priority": "High",
+      "score": 86,
+      "severity": 8,
+      "reports": 37,
+      "department": "Sanitation",
+      "date": "2026-09-10",
+      "user_id": "5cd65845-5507-4e3e-ae41-2232dbf60270",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "a95e019d-f496-4f43-9f2d-cac87cd73722"
+    },
+    {
+      "issue_code": "CP-1021",
+      "type": "Water Leakage",
+      "description": "Main pipeline leak flooding the lane every morning.",
+      "city": "Vijayawada",
+      "area": "Governorpet",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.62,
+          16.515
+        ]
+      },
+      "lat": 16.515,
+      "lng": 80.62,
+      "status": "In Progress",
+      "priority": "High",
+      "score": 84,
+      "severity": 8,
+      "reports": 29,
+      "department": "Water Supply",
+      "date": "2026-09-08",
+      "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "0efdb854-deff-408f-a064-99fd8078a66e"
+    },
+    {
+      "issue_code": "CP-1014",
+      "type": "Drainage Blockage",
+      "description": "Stagnant water after rainfall, mosquito breeding risk.",
+      "city": "Tenali",
+      "area": "Gandhi Chowk",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.6404,
+          16.2428
+        ]
+      },
+      "lat": 16.2428,
+      "lng": 80.6404,
+      "status": "Pending",
+      "priority": "Medium",
+      "score": 71,
+      "severity": 7,
+      "reports": 18,
+      "department": "Public Works",
+      "date": "2026-09-07",
+      "user_id": "5cd65845-5507-4e3e-ae41-2232dbf60270",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "903a9c8a-9266-494e-82d0-6511009521bc"
+    },
+    {
+      "issue_code": "CP-0998",
+      "type": "Streetlight Failure",
+      "description": "Entire stretch dark after 7 PM, safety concern for pedestrians.",
+      "city": "Mangalagiri",
+      "area": "NH-16 Corridor",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.568,
+          16.4308
+        ]
+      },
+      "lat": 16.4308,
+      "lng": 80.568,
+      "status": "Resolved",
+      "priority": "Medium",
+      "score": 64,
+      "severity": 5,
+      "reports": 12,
+      "department": "Electrical",
+      "date": "2026-08-29",
+      "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "80e84547-e621-4ccf-8d61-bd2c2493c10e"
+    },
+    {
+      "issue_code": "CP-0981",
+      "type": "Road Damage",
+      "description": "Cracked shoulder near school zone.",
+      "city": "Guntur",
+      "area": "Arundelpet",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.45,
+          16.3
+        ]
+      },
+      "lat": 16.3,
+      "lng": 80.45,
+      "status": "Pending",
+      "priority": "Medium",
+      "score": 68,
+      "severity": 6,
+      "reports": 15,
+      "department": "Roads & Transport",
+      "date": "2026-09-05",
+      "user_id": "5cd65845-5507-4e3e-ae41-2232dbf60270",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "6fda5b04-e391-4194-bf98-e6d97bf15a03"
+    },
+    {
+      "issue_code": "CP-0966",
+      "type": "Garbage Accumulation",
+      "description": "Dumping behind bus stand despite prior complaints.",
+      "city": "Vijayawada",
+      "area": "PNBS",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.63,
+          16.518
+        ]
+      },
+      "lat": 16.518,
+      "lng": 80.63,
+      "status": "Assigned",
+      "priority": "High",
+      "score": 88,
+      "severity": 8,
+      "reports": 41,
+      "department": "Sanitation",
+      "date": "2026-09-11",
+      "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "66302f3c-bfbc-4e78-99e9-a9a00d72e5e5"
+    },
+    {
+      "issue_code": "CP-0944",
+      "type": "Water Leakage",
+      "description": "Intermittent supply plus visible leak at junction.",
+      "city": "Tenali",
+      "area": "Chenchupet",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.65,
+          16.25
+        ]
+      },
+      "lat": 16.25,
+      "lng": 80.65,
+      "status": "Resolved",
+      "priority": "Low",
+      "score": 42,
+      "severity": 4,
+      "reports": 6,
+      "department": "Water Supply",
+      "date": "2026-08-21",
+      "user_id": "5cd65845-5507-4e3e-ae41-2232dbf60270",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "499029fe-7844-4ea4-85b3-54e3a2d1623a"
+    },
+    {
+      "issue_code": "CP-0930",
+      "type": "Streetlight Failure",
+      "description": "Three poles out near park entrance.",
+      "city": "Guntur",
+      "area": "Nagarampalem",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.42,
+          16.32
+        ]
+      },
+      "lat": 16.32,
+      "lng": 80.42,
+      "status": "In Progress",
+      "priority": "Low",
+      "score": 39,
+      "severity": 3,
+      "reports": 8,
+      "department": "Electrical",
+      "date": "2026-09-03",
+      "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "46d7722d-0b0e-4755-bf6e-96b9731f1ca9"
+    },
+    {
+      "issue_code": "CP-0912",
+      "type": "Drainage Blockage",
+      "description": "Manhole overflow during peak hours.",
+      "city": "Vijayawada",
+      "area": "Patamata",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.67,
+          16.49
+        ]
+      },
+      "lat": 16.49,
+      "lng": 80.67,
+      "status": "Pending",
+      "priority": "High",
+      "score": 82,
+      "severity": 8,
+      "reports": 26,
+      "department": "Public Works",
+      "date": "2026-09-13",
+      "user_id": "5cd65845-5507-4e3e-ae41-2232dbf60270",
+      "created_at": "2026-10-19 15:22:21.630299+00:00",
+      "updated_at": "2026-10-19 15:22:21.630299+00:00",
+      "_id": "df1809e2-a603-4212-b74d-c610f4abff88"
+    },
+    {
+      "issue_code": "CP-1043",
+      "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
+      "type": "Road Damage",
+      "description": "Updated: Large dangerous pothole right in front of bus stand with sharp edge",
+      "city": "Vijayawada",
+      "area": "Benz Circle",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.648,
+          16.5062
+        ]
+      },
+      "lat": 16.5062,
+      "lng": 80.648,
+      "severity": 8,
+      "score": 61,
+      "priority": "Medium",
+      "status": "Resolved",
+      "department": "Roads & Transport",
+      "reports": 1,
+      "photo": null,
+      "created_at": "2026-10-19 15:27:17.367992+00:00",
+      "updated_at": "2026-10-19 15:27:17.512882+00:00",
+      "date": "2026-10-19",
+      "_id": "fb6794a0-d627-4349-9951-9a48b1ecf977",
+      "resolved_at": "2026-10-19 15:27:17.512882+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "area": "Benz Circle",
+      "period_start": "2026-10-20",
+      "name": "Benz Circle, Vijayawada",
+      "city": "Vijayawada",
+      "lat": 16.5062,
+      "lng": 80.648,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 9.2,
+      "risk_level": "Medium",
+      "priority": "Medium",
+      "issues": 10,
+      "top_categories": [
+        "Road Damage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "3f87dbd7-9873-4024-87e0-0ae4cb5b628d"
+    },
+    {
+      "area": "PNBS",
+      "period_start": "2026-10-20",
+      "name": "PNBS, Vijayawada",
+      "city": "Vijayawada",
+      "lat": 16.518,
+      "lng": 80.63,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 8.7,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Garbage Accumulation"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "5965a39d-2a79-43b9-8e13-a013e1b66c03"
+    },
+    {
+      "area": "Patamata",
+      "period_start": "2026-10-20",
+      "name": "Patamata, Vijayawada",
+      "city": "Vijayawada",
+      "lat": 16.49,
+      "lng": 80.67,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 8.9,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Drainage Blockage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "71aeac53-1d09-40f6-8bfa-2f8c30d8169a"
+    },
+    {
+      "area": "Governorpet",
+      "period_start": "2026-10-20",
+      "name": "Governorpet, Vijayawada",
+      "city": "Vijayawada",
+      "lat": 16.515,
+      "lng": 80.62,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 8.6,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Water Leakage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "39122cd0-dcc4-44fb-91b1-d9ac92cc702b"
+    },
+    {
+      "area": "Brodipet",
+      "period_start": "2026-10-20",
+      "name": "Brodipet, Guntur",
+      "city": "Guntur",
+      "lat": 16.3067,
+      "lng": 80.4365,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 8.7,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Garbage Accumulation"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "fa0ea60e-0c94-4067-bc3e-cf462a895470"
+    },
+    {
+      "area": "Arundelpet",
+      "period_start": "2026-10-20",
+      "name": "Arundelpet, Guntur",
+      "city": "Guntur",
+      "lat": 16.3,
+      "lng": 80.45,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 8.8,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Road Damage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "0a9bbc7b-40e2-4f2c-afc6-ce61dc6b2aa6"
+    },
+    {
+      "area": "Nagarampalem",
+      "period_start": "2026-10-20",
+      "name": "Nagarampalem, Guntur",
+      "city": "Guntur",
+      "lat": 16.32,
+      "lng": 80.42,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 8.4,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Streetlight Failure"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "d6533845-7e7c-4dbb-b5eb-3b478cc959c2"
+    },
+    {
+      "area": "Gandhi Chowk",
+      "period_start": "2026-10-20",
+      "name": "Gandhi Chowk, Tenali",
+      "city": "Tenali",
+      "lat": 16.2428,
+      "lng": 80.6404,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 8.7,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Drainage Blockage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "59c3d21e-6c83-464f-ae78-568e42262a7a"
+    },
+    {
+      "area": "Chenchupet",
+      "period_start": "2026-10-20",
+      "name": "Chenchupet, Tenali",
+      "city": "Tenali",
+      "lat": 16.25,
+      "lng": 80.65,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 8.9,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Water Leakage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "ac0aec1e-f630-4b2e-a05f-c62491c60128"
+    },
+    {
+      "area": "NH-16 Corridor",
+      "period_start": "2026-10-20",
+      "name": "NH-16, Mangalagiri",
+      "city": "Mangalagiri",
+      "lat": 16.4308,
+      "lng": 80.568,
+      "period_end": "2026-10-26",
+      "predicted_issue_count": 8.6,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Streetlight Failure"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-19T15:22:21.658776+00:00",
+      "_id": "d898a967-15d0-493c-b6dc-a31cda5f1f99"
+    }
+  ],
+  "resource_allocations": [
+    {
+      "area": "Benz Circle",
+      "department": "Roads & Transport",
+      "id": "res-benz-circle-roads-&-transport",
+      "city": "Vijayawada",
+      "predicted_demand": 9.2,
+      "available_crews": 14,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Asphalt roller",
+        "Patch truck",
+        "Safety barricades"
+      ],
+      "priority": "Medium",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "93cab77e-c288-468c-b0a8-7f8d6d122866"
+    },
+    {
+      "area": "Patamata",
+      "department": "Public Works",
+      "id": "res-patamata-public-works",
+      "city": "Vijayawada",
+      "predicted_demand": 8.9,
+      "available_crews": 10,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Silt cleaner",
+        "Trenching tool",
+        "Dewatering unit"
+      ],
+      "priority": "Low",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "e7d44495-f239-4cd8-9e27-8b13aed4568c"
+    },
+    {
+      "area": "Chenchupet",
+      "department": "Water Supply",
+      "id": "res-chenchupet-water-supply",
+      "city": "Tenali",
+      "predicted_demand": 8.9,
+      "available_crews": 10,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Excavator",
+        "High-pressure pump",
+        "Pipe-couplers"
+      ],
+      "priority": "Low",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "5bc5b784-a725-49a0-bb16-453d708347c3"
+    },
+    {
+      "area": "Arundelpet",
+      "department": "Roads & Transport",
+      "id": "res-arundelpet-roads-&-transport",
+      "city": "Guntur",
+      "predicted_demand": 8.8,
+      "available_crews": 14,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Asphalt roller",
+        "Patch truck",
+        "Safety barricades"
+      ],
+      "priority": "Low",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "c9133ae5-5b26-433c-9778-b3090ee06041"
+    },
+    {
+      "area": "PNBS",
+      "department": "Sanitation",
+      "id": "res-pnbs-sanitation",
+      "city": "Vijayawada",
+      "predicted_demand": 8.7,
+      "available_crews": 12,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Compactor truck",
+        "Disposal skips",
+        "PPE sets"
+      ],
+      "priority": "Low",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "3e3c2547-f1ed-4656-8714-73bfed015218"
+    },
+    {
+      "area": "Brodipet",
+      "department": "Sanitation",
+      "id": "res-brodipet-sanitation",
+      "city": "Guntur",
+      "predicted_demand": 8.7,
+      "available_crews": 12,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Compactor truck",
+        "Disposal skips",
+        "PPE sets"
+      ],
+      "priority": "Low",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "5d408f42-1a05-403a-bda9-9cf818daab0d"
+    },
+    {
+      "area": "Gandhi Chowk",
+      "department": "Public Works",
+      "id": "res-gandhi-chowk-public-works",
+      "city": "Tenali",
+      "predicted_demand": 8.7,
+      "available_crews": 10,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Silt cleaner",
+        "Trenching tool",
+        "Dewatering unit"
+      ],
+      "priority": "Low",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "95bd0303-85c2-4697-a14c-afefc92a6b19"
+    },
+    {
+      "area": "Governorpet",
+      "department": "Water Supply",
+      "id": "res-governorpet-water-supply",
+      "city": "Vijayawada",
+      "predicted_demand": 8.6,
+      "available_crews": 10,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Excavator",
+        "High-pressure pump",
+        "Pipe-couplers"
+      ],
+      "priority": "Low",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "5e446e48-6c0c-4bc8-9cac-301f2db46ac1"
+    },
+    {
+      "area": "NH-16 Corridor",
+      "department": "Electrical",
+      "id": "res-nh-16-corridor-electrical",
+      "city": "Mangalagiri",
+      "predicted_demand": 8.6,
+      "available_crews": 8,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Hydraulic lift truck",
+        "Replacement LED fixtures",
+        "Voltage tester"
+      ],
+      "priority": "Low",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "242c144d-5dfa-4529-859b-e93c490b0353"
+    },
+    {
+      "area": "Nagarampalem",
+      "department": "Electrical",
+      "id": "res-nagarampalem-electrical",
+      "city": "Guntur",
+      "predicted_demand": 8.4,
+      "available_crews": 8,
+      "recommended_crews": 2,
+      "equipment_requirements": [
+        "Hydraulic lift truck",
+        "Replacement LED fixtures",
+        "Voltage tester"
+      ],
+      "priority": "Low",
+      "allocation_status": "Pending Review",
+      "updated_at": "2026-10-19T15:22:21.728578+00:00",
+      "_id": "63d74c6c-340c-4eb2-8f78-2e9e389a0ba6"
+    }
+  ]
+}

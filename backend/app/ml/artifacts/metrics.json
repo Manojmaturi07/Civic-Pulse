@@ -1,0 +1,49 @@
+{
+  "model_name": "CivicPulse Random Forest Hotspot Forecaster",
+  "model_version": "v1.2.0",
+  "algorithm": "RandomForestRegressor(n_estimators=100, max_depth=8)",
+  "target_definition": "Predicted civic complaints in zone over next 7 days",
+  "mae": 2.35,
+  "rmse": 2.83,
+  "r2": 0.392,
+  "baseline_mae": 2.56,
+  "trained_at": "2026-10-20T01:29:33.768043+00:00",
+  "sample_count": 280,
+  "features": [
+    "complaints_lag_1",
+    "complaints_lag_2",
+    "complaints_lag_3",
+    "complaints_roll_mean_2w",
+    "avg_severity",
+    "backlog_ratio",
+    "pct_road_damage",
+    "pct_garbage",
+    "pct_drainage",
+    "pct_water_leak",
+    "pct_streetlight",
+    "month",
+    "week_of_year"
+  ],
+  "feature_importances": {
+    "complaints_lag_1": 0.1135,
+    "complaints_lag_2": 0.0366,
+    "complaints_lag_3": 0.0422,
+    "complaints_roll_mean_2w": 0.4889,
+    "avg_severity": 0.0379,
+    "backlog_ratio": 0.0281,
+    "pct_road_damage": 0.0311,
+    "pct_garbage": 0.0293,
+    "pct_drainage": 0.0263,
+    "pct_water_leak": 0.0219,
+    "pct_streetlight": 0.0255,
+    "month": 0.014,
+    "week_of_year": 0.1046
+  },
+  "risk_thresholds": {
+    "Critical": ">= 28 complaints/week",
+    "High": "18 - 27 complaints/week",
+    "Medium": "9 - 17 complaints/week",
+    "Low": "< 9 complaints/week"
+  },
+  "is_trained": true
+}
