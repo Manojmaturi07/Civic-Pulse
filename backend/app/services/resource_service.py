@@ -63,6 +63,7 @@ class ResourceService:
                 "equipment_requirements": equip,
                 "priority": risk,
                 "allocation_status": "Pending Review",
+                "notes": "",
                 "updated_at": now_str,
             }
 
@@ -93,12 +94,20 @@ class ResourceService:
                 "equipment_requirements": d.get("equipment_requirements", []),
                 "priority": d.get("priority", "Medium"),
                 "allocation_status": d.get("allocation_status", "Pending Review"),
+                "notes": d.get("notes", ""),
                 "updated_at": str(d.get("updated_at", "")),
             })
         return results
 
     def approve_or_update(self, alloc_id: str, status: str, approved_crews: Optional[int] = None, notes: Optional[str] = None) -> Optional[Dict[str, Any]]:
-        target = self.db.resource_allocations.find_one({"$or": [{"_id": alloc_id}, {"id": alloc_id}]})
+        query_conditions = [{"_id": alloc_id}, {"id": alloc_id}]
+        try:
+            from bson import ObjectId
+            if ObjectId.is_valid(alloc_id):
+                query_conditions.append({"_id": ObjectId(alloc_id)})
+        except Exception:
+            pass
+        target = self.db.resource_allocations.find_one({"$or": query_conditions})
         if not target:
             return None
 
@@ -108,14 +117,14 @@ class ResourceService:
         }
         if approved_crews is not None:
             update_dict["recommended_crews"] = approved_crews
-        if notes:
+        if notes is not None:
             update_dict["notes"] = notes
 
         self.db.resource_allocations.update_one(
-            {"$or": [{"_id": target.get("_id")}, {"id": target.get("id")}]},
+            {"$or": query_conditions},
             {"$set": update_dict}
         )
-        updated = self.db.resource_allocations.find_one({"$or": [{"_id": target.get("_id")}, {"id": target.get("id")}]})
+        updated = self.db.resource_allocations.find_one({"$or": query_conditions})
         return {
             "id": str(updated.get("_id", updated.get("id"))),
             "area": updated.get("area"),
@@ -127,5 +136,6 @@ class ResourceService:
             "equipment_requirements": updated.get("equipment_requirements"),
             "priority": updated.get("priority"),
             "allocation_status": updated.get("allocation_status"),
+            "notes": updated.get("notes", ""),
             "updated_at": updated.get("updated_at"),
         }

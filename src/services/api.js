@@ -148,7 +148,8 @@ export const api = {
   // Analytics & ML Model
   getAnalyticsOverview: () => request('/analytics/overview'),
   getIssuesByType: () => request('/analytics/issues-by-type'),
-  getTrends: () => request('/analytics/trends'),
+  getTrends: (granularity = 'monthly') => request(`/analytics/trends?granularity=${encodeURIComponent(granularity)}`),
+  getAreaComparison: () => request('/analytics/area-comparison'),
   getDepartmentWorkload: () => request('/analytics/department-workload'),
   getResolutionPerformance: () => request('/analytics/resolution-performance'),
   getModelMetrics: () => request('/analytics/model-metrics'),

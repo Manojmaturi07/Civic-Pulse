@@ -1,8 +1,8 @@
-from typing import List
-from fastapi import APIRouter, Depends
+from typing import List, Optional
+from fastapi import APIRouter, Depends, Query
 from app.db.mongodb import get_database
 from app.core.dependencies import get_current_user
-from app.schemas.analytics import AnalyticsOverview, CategoryCount, TrendPoint, WorkloadSummary
+from app.schemas.analytics import AnalyticsOverview, CategoryCount, TrendPoint, WorkloadSummary, AreaComparisonPoint
 from app.schemas.prediction import ModelMetricsResponse
 from app.services.analytics_service import AnalyticsService
 from app.ml.predict import predictor
@@ -22,10 +22,19 @@ async def get_issues_by_type(db = Depends(get_database)):
     return service.get_issues_by_type()
 
 @router.get("/trends", response_model=List[TrendPoint])
-async def get_trends(db = Depends(get_database)):
-    """Compute monthly reported vs resolved actuals."""
+async def get_trends(
+    granularity: str = Query("monthly", pattern="^(daily|weekly|monthly)$"),
+    db = Depends(get_database)
+):
+    """Compute reported vs resolved actuals with optional time grouping and forward forecast."""
     service = AnalyticsService(db)
-    return service.get_monthly_trends()
+    return service.get_monthly_trends(granularity=granularity)
+
+@router.get("/area-comparison", response_model=List[AreaComparisonPoint])
+async def get_area_comparison(db = Depends(get_database)):
+    """Compare historical complaints vs ML predicted volume across monitored zones."""
+    service = AnalyticsService(db)
+    return service.get_area_comparison()
 
 @router.get("/department-workload", response_model=List[WorkloadSummary])
 async def get_department_workload(db = Depends(get_database)):

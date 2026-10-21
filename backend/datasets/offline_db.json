@@ -90,6 +90,32 @@
       "created_at": "2026-10-20 02:51:59.597376+00:00",
       "updated_at": "2026-10-20 02:51:59.597376+00:00",
       "_id": "bcc517cc-4a63-4d98-a6e6-9d3c25f618dd"
+    },
+    {
+      "name": "Citizen Ramesh",
+      "email": "test_630acb68@example.com",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$dxI56h9i8aKLot5ybJ1W+Q$vXdxurPIPzucukZClNFk4SrLvaadPwuZvggEytkzZqc",
+      "role": "citizen",
+      "city": "Vijayawada",
+      "department": "Resident",
+      "avatar": "\ud83d\udc64",
+      "is_active": true,
+      "created_at": "2026-10-21 04:04:00.200766+00:00",
+      "updated_at": "2026-10-21 04:04:00.200766+00:00",
+      "_id": "fe2ff140-2d55-4086-a159-5d1c902522b3"
+    },
+    {
+      "name": "Citizen Ramesh",
+      "email": "test_620bdead@example.com",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$wQbVfvXFGC7W1WJqXfrk6Q$0sx1e1m5AyZIEFZDQPoTwtEWpx8iXrQ2AF6oYuQrxVg",
+      "role": "citizen",
+      "city": "Vijayawada",
+      "department": "Resident",
+      "avatar": "\ud83d\udc64",
+      "is_active": true,
+      "created_at": "2026-10-21 04:13:46.205581+00:00",
+      "updated_at": "2026-10-21 04:13:46.205581+00:00",
+      "_id": "7d5895e2-5187-4711-bb4a-2b26e1b28ab7"
     }
   ],
   "issues": [
@@ -108,7 +134,7 @@
       },
       "lat": 16.5062,
       "lng": 80.648,
-      "status": "Pending",
+      "status": "Resolved",
       "priority": "High",
       "score": 91,
       "severity": 9,
@@ -117,8 +143,9 @@
       "date": "2026-09-12",
       "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
       "created_at": "2026-10-19 15:22:21.630299+00:00",
-      "updated_at": "2026-10-19 15:22:21.630299+00:00",
-      "_id": "b5917030-33d6-4326-ac95-34ee6430648d"
+      "updated_at": "2026-10-21 03:59:37.299237+00:00",
+      "_id": "b5917030-33d6-4326-ac95-34ee6430648d",
+      "resolved_at": "2026-10-21 03:59:37.299237+00:00"
     },
     {
       "issue_code": "CP-1038",
@@ -135,7 +162,7 @@
       },
       "lat": 16.3067,
       "lng": 80.4365,
-      "status": "Assigned",
+      "status": "Resolved",
       "priority": "High",
       "score": 86,
       "severity": 8,
@@ -144,8 +171,9 @@
       "date": "2026-09-10",
       "user_id": "5cd65845-5507-4e3e-ae41-2232dbf60270",
       "created_at": "2026-10-19 15:22:21.630299+00:00",
-      "updated_at": "2026-10-19 15:22:21.630299+00:00",
-      "_id": "a95e019d-f496-4f43-9f2d-cac87cd73722"
+      "updated_at": "2026-10-21 04:00:49.942474+00:00",
+      "_id": "a95e019d-f496-4f43-9f2d-cac87cd73722",
+      "resolved_at": "2026-10-21 04:00:49.942474+00:00"
     },
     {
       "issue_code": "CP-1021",
@@ -162,7 +190,7 @@
       },
       "lat": 16.515,
       "lng": 80.62,
-      "status": "In Progress",
+      "status": "Resolved",
       "priority": "High",
       "score": 84,
       "severity": 8,
@@ -171,8 +199,9 @@
       "date": "2026-09-08",
       "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
       "created_at": "2026-10-19 15:22:21.630299+00:00",
-      "updated_at": "2026-10-19 15:22:21.630299+00:00",
-      "_id": "0efdb854-deff-408f-a064-99fd8078a66e"
+      "updated_at": "2026-10-21 04:01:13.469978+00:00",
+      "_id": "0efdb854-deff-408f-a064-99fd8078a66e",
+      "resolved_at": "2026-10-21 04:01:13.469978+00:00"
     },
     {
       "issue_code": "CP-1014",
@@ -243,7 +272,7 @@
       },
       "lat": 16.3,
       "lng": 80.45,
-      "status": "Pending",
+      "status": "Resolved",
       "priority": "Medium",
       "score": 68,
       "severity": 6,
@@ -252,8 +281,9 @@
       "date": "2026-09-05",
       "user_id": "5cd65845-5507-4e3e-ae41-2232dbf60270",
       "created_at": "2026-10-19 15:22:21.630299+00:00",
-      "updated_at": "2026-10-19 15:22:21.630299+00:00",
-      "_id": "6fda5b04-e391-4194-bf98-e6d97bf15a03"
+      "updated_at": "2026-10-21 04:00:27.681208+00:00",
+      "_id": "6fda5b04-e391-4194-bf98-e6d97bf15a03",
+      "resolved_at": "2026-10-21 04:00:27.681208+00:00"
     },
     {
       "issue_code": "CP-0966",
@@ -270,7 +300,7 @@
       },
       "lat": 16.518,
       "lng": 80.63,
-      "status": "Assigned",
+      "status": "Resolved",
       "priority": "High",
       "score": 88,
       "severity": 8,
@@ -279,8 +309,9 @@
       "date": "2026-09-11",
       "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
       "created_at": "2026-10-19 15:22:21.630299+00:00",
-      "updated_at": "2026-10-19 15:22:21.630299+00:00",
-      "_id": "66302f3c-bfbc-4e78-99e9-a9a00d72e5e5"
+      "updated_at": "2026-10-21 04:00:49.985228+00:00",
+      "_id": "66302f3c-bfbc-4e78-99e9-a9a00d72e5e5",
+      "resolved_at": "2026-10-21 04:00:49.985228+00:00"
     },
     {
       "issue_code": "CP-0944",
@@ -391,6 +422,93 @@
       "date": "2026-10-19",
       "_id": "fb6794a0-d627-4349-9951-9a48b1ecf977",
       "resolved_at": "2026-10-19 15:27:17.512882+00:00"
+    },
+    {
+      "issue_code": "CP-1044",
+      "user_id": "888a8950-b904-4cb1-95cd-9ac043ccdce1",
+      "type": "Road Damage",
+      "description": "road has man holes and it should be covered",
+      "city": "Vijayawada",
+      "area": "Krishna District",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.67851,
+          16.49999
+        ]
+      },
+      "lat": 16.49999,
+      "lng": 80.67851,
+      "severity": 8,
+      "score": 61,
+      "priority": "Medium",
+      "status": "Resolved",
+      "department": "Roads & Transport",
+      "reports": 1,
+      "photo": null,
+      "created_at": "2026-10-21 03:25:26.931850+00:00",
+      "updated_at": "2026-10-21 03:26:50.267999+00:00",
+      "date": "2026-10-21",
+      "_id": "27cfcf73-bd6c-4c78-b9eb-61ed5bfc36d4",
+      "resolved_at": "2026-10-21 03:26:50.267999+00:00"
+    },
+    {
+      "issue_code": "CP-1045",
+      "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
+      "type": "Road Damage",
+      "description": "Updated: Large dangerous pothole right in front of bus stand with sharp edge",
+      "city": "Vijayawada",
+      "area": "Benz Circle",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.648,
+          16.5062
+        ]
+      },
+      "lat": 16.5062,
+      "lng": 80.648,
+      "severity": 8,
+      "score": 61,
+      "priority": "Medium",
+      "status": "Resolved",
+      "department": "Roads & Transport",
+      "reports": 1,
+      "photo": null,
+      "created_at": "2026-10-21 04:04:27.761693+00:00",
+      "updated_at": "2026-10-21 04:04:27.857750+00:00",
+      "date": "2026-10-21",
+      "_id": "86ca5303-c658-4ff0-821a-b02de8e955d1",
+      "resolved_at": "2026-10-21 04:04:27.857750+00:00"
+    },
+    {
+      "issue_code": "CP-1046",
+      "user_id": "c2b41218-4db4-40eb-ba80-bf15a10dccb5",
+      "type": "Road Damage",
+      "description": "Updated: Large dangerous pothole right in front of bus stand with sharp edge",
+      "city": "Vijayawada",
+      "area": "Benz Circle",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          80.648,
+          16.5062
+        ]
+      },
+      "lat": 16.5062,
+      "lng": 80.648,
+      "severity": 8,
+      "score": 61,
+      "priority": "Medium",
+      "status": "Resolved",
+      "department": "Roads & Transport",
+      "reports": 1,
+      "photo": null,
+      "created_at": "2026-10-21 04:14:14.429273+00:00",
+      "updated_at": "2026-10-21 04:14:14.497252+00:00",
+      "date": "2026-10-21",
+      "_id": "e1873a6e-17d8-46d2-9e27-bf39b04cb57e",
+      "resolved_at": "2026-10-21 04:14:14.497252+00:00"
     }
   ],
   "predictions": [
@@ -583,6 +701,196 @@
       "model_version": "v1.2.0",
       "created_at": "2026-10-19T15:22:21.658776+00:00",
       "_id": "d898a967-15d0-493c-b6dc-a31cda5f1f99"
+    },
+    {
+      "area": "Benz Circle",
+      "period_start": "2026-10-22",
+      "name": "Benz Circle, Vijayawada",
+      "city": "Vijayawada",
+      "lat": 16.5062,
+      "lng": 80.648,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 9.2,
+      "risk_level": "Medium",
+      "priority": "Medium",
+      "issues": 10,
+      "top_categories": [
+        "Road Damage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "f49515e8-ba06-4f8d-9a40-82dad8ca7dd7"
+    },
+    {
+      "area": "PNBS",
+      "period_start": "2026-10-22",
+      "name": "PNBS, Vijayawada",
+      "city": "Vijayawada",
+      "lat": 16.518,
+      "lng": 80.63,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 8.7,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Garbage Accumulation"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "f1f91f7f-dec7-4d06-afc0-7a8f4bf16a70"
+    },
+    {
+      "area": "Patamata",
+      "period_start": "2026-10-22",
+      "name": "Patamata, Vijayawada",
+      "city": "Vijayawada",
+      "lat": 16.49,
+      "lng": 80.67,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 8.9,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Drainage Blockage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "f067c445-1a14-4515-9d19-a28f39e9ced5"
+    },
+    {
+      "area": "Governorpet",
+      "period_start": "2026-10-22",
+      "name": "Governorpet, Vijayawada",
+      "city": "Vijayawada",
+      "lat": 16.515,
+      "lng": 80.62,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 8.6,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Water Leakage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "8e2c8399-f5f4-4275-b7c8-aa95f43acc0c"
+    },
+    {
+      "area": "Brodipet",
+      "period_start": "2026-10-22",
+      "name": "Brodipet, Guntur",
+      "city": "Guntur",
+      "lat": 16.3067,
+      "lng": 80.4365,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 8.7,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Garbage Accumulation"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "957bb092-4d0d-4c53-a29f-40a956b9ec75"
+    },
+    {
+      "area": "Arundelpet",
+      "period_start": "2026-10-22",
+      "name": "Arundelpet, Guntur",
+      "city": "Guntur",
+      "lat": 16.3,
+      "lng": 80.45,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 8.8,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Road Damage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "83852c42-64e0-4c53-aa4f-fe1d6303d902"
+    },
+    {
+      "area": "Nagarampalem",
+      "period_start": "2026-10-22",
+      "name": "Nagarampalem, Guntur",
+      "city": "Guntur",
+      "lat": 16.32,
+      "lng": 80.42,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 8.4,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Streetlight Failure"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "68fe6842-a9fc-46e3-b174-434cd6341151"
+    },
+    {
+      "area": "Gandhi Chowk",
+      "period_start": "2026-10-22",
+      "name": "Gandhi Chowk, Tenali",
+      "city": "Tenali",
+      "lat": 16.2428,
+      "lng": 80.6404,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 8.7,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Drainage Blockage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "a3ff9b16-e288-41a4-a1d5-78799529aa34"
+    },
+    {
+      "area": "Chenchupet",
+      "period_start": "2026-10-22",
+      "name": "Chenchupet, Tenali",
+      "city": "Tenali",
+      "lat": 16.25,
+      "lng": 80.65,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 8.9,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Water Leakage"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "ee85e40f-f880-4e46-8af4-dc748a01c800"
+    },
+    {
+      "area": "NH-16 Corridor",
+      "period_start": "2026-10-22",
+      "name": "NH-16, Mangalagiri",
+      "city": "Mangalagiri",
+      "lat": 16.4308,
+      "lng": 80.568,
+      "period_end": "2026-10-28",
+      "predicted_issue_count": 8.6,
+      "risk_level": "Low",
+      "priority": "Low",
+      "issues": 10,
+      "top_categories": [
+        "Streetlight Failure"
+      ],
+      "model_version": "v1.2.0",
+      "created_at": "2026-10-21T03:24:11.742155+00:00",
+      "_id": "8c94755c-d95b-487f-927c-8bd46a177492"
     }
   ],
   "resource_allocations": [
@@ -601,8 +909,9 @@
       ],
       "priority": "Medium",
       "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "93cab77e-c288-468c-b0a8-7f8d6d122866"
+      "updated_at": "2026-10-21T03:59:43.749090+00:00",
+      "_id": "93cab77e-c288-468c-b0a8-7f8d6d122866",
+      "notes": ""
     },
     {
       "area": "Patamata",
@@ -619,8 +928,9 @@
       ],
       "priority": "Low",
       "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "e7d44495-f239-4cd8-9e27-8b13aed4568c"
+      "updated_at": "2026-10-21T03:59:43.749090+00:00",
+      "_id": "e7d44495-f239-4cd8-9e27-8b13aed4568c",
+      "notes": ""
     },
     {
       "area": "Chenchupet",
@@ -637,8 +947,9 @@
       ],
       "priority": "Low",
       "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "5bc5b784-a725-49a0-bb16-453d708347c3"
+      "updated_at": "2026-10-21T03:59:43.749090+00:00",
+      "_id": "5bc5b784-a725-49a0-bb16-453d708347c3",
+      "notes": ""
     },
     {
       "area": "Arundelpet",
@@ -654,9 +965,10 @@
         "Safety barricades"
       ],
       "priority": "Low",
-      "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "c9133ae5-5b26-433c-9778-b3090ee06041"
+      "allocation_status": "Deployed",
+      "updated_at": "2026-10-21T04:01:24.032608+00:00",
+      "_id": "c9133ae5-5b26-433c-9778-b3090ee06041",
+      "notes": ""
     },
     {
       "area": "PNBS",
@@ -673,8 +985,9 @@
       ],
       "priority": "Low",
       "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "3e3c2547-f1ed-4656-8714-73bfed015218"
+      "updated_at": "2026-10-21T03:59:43.749090+00:00",
+      "_id": "3e3c2547-f1ed-4656-8714-73bfed015218",
+      "notes": ""
     },
     {
       "area": "Brodipet",
@@ -691,8 +1004,9 @@
       ],
       "priority": "Low",
       "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "5d408f42-1a05-403a-bda9-9cf818daab0d"
+      "updated_at": "2026-10-21T03:59:43.749090+00:00",
+      "_id": "5d408f42-1a05-403a-bda9-9cf818daab0d",
+      "notes": ""
     },
     {
       "area": "Gandhi Chowk",
@@ -709,8 +1023,9 @@
       ],
       "priority": "Low",
       "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "95bd0303-85c2-4697-a14c-afefc92a6b19"
+      "updated_at": "2026-10-21T03:59:43.749090+00:00",
+      "_id": "95bd0303-85c2-4697-a14c-afefc92a6b19",
+      "notes": ""
     },
     {
       "area": "Governorpet",
@@ -727,8 +1042,9 @@
       ],
       "priority": "Low",
       "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "5e446e48-6c0c-4bc8-9cac-301f2db46ac1"
+      "updated_at": "2026-10-21T03:59:43.749090+00:00",
+      "_id": "5e446e48-6c0c-4bc8-9cac-301f2db46ac1",
+      "notes": ""
     },
     {
       "area": "NH-16 Corridor",
@@ -745,8 +1061,9 @@
       ],
       "priority": "Low",
       "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "242c144d-5dfa-4529-859b-e93c490b0353"
+      "updated_at": "2026-10-21T03:59:43.749090+00:00",
+      "_id": "242c144d-5dfa-4529-859b-e93c490b0353",
+      "notes": ""
     },
     {
       "area": "Nagarampalem",
@@ -763,8 +1080,9 @@
       ],
       "priority": "Low",
       "allocation_status": "Pending Review",
-      "updated_at": "2026-10-19T15:22:21.728578+00:00",
-      "_id": "63d74c6c-340c-4eb2-8f78-2e9e389a0ba6"
+      "updated_at": "2026-10-21T03:59:43.749090+00:00",
+      "_id": "63d74c6c-340c-4eb2-8f78-2e9e389a0ba6",
+      "notes": ""
     }
   ]
 }

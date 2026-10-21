@@ -12,6 +12,7 @@ class ResourceAllocationResponse(BaseModel):
     equipment_requirements: List[str]
     priority: str
     allocation_status: str
+    notes: Optional[str] = None
     updated_at: str
 
 class ResourceApprovalRequest(BaseModel):
